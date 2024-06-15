@@ -18,15 +18,23 @@ export default {
   components: {
     PostDetail,
   },
-  async mounted() {
-    try {
-      const response = await axios.get(
-        "https://65dd7c93e7edadead7ee0a54.mockapi.io/user"
-      );
-      this.posts = response.data; 
-    } catch (error) {
-      console.error("Error fetching posts:", error);
+  methods: {
+    fetchData: async function() {
+      try {
+        const response = await axios.get(
+          "https://65dd7c93e7edadead7ee0a54.mockapi.io/user"
+        );
+        this.posts = response.data;
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+      }
+    },
+    async handlePostAdded(){
+      await this.fetchData();
     }
+  },
+  async mounted() {
+    await this.fetchData();
   },
   data() {
     return {
