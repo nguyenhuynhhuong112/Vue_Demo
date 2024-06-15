@@ -18,6 +18,9 @@
               <a-menu-item key="0">
                 <router-link to="/login">Logout</router-link>
               </a-menu-item>
+              <a-menu-item key="1">
+                <router-link :to="'/profile/' + username">Trang cá nhân</router-link>
+              </a-menu-item>
             </a-menu>
           </template>
         </a-dropdown>
@@ -50,6 +53,7 @@ export default {
   data() {
     return {
       open: ref(false),
+      username:'',
       newPost: {
         id: "1512",
         username: "Chu Duc Nhien",
@@ -59,6 +63,11 @@ export default {
         like: 0,
       },
     };
+  },
+
+  mounted() {
+    this.username = localStorage.getItem("username");
+    console.log("mounted: ", this.username);
   },
   methods: {
     showModal() {
