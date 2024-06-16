@@ -10,36 +10,20 @@
     />
   </div>
 </template>
-<script>
+<script lang="ts">
 import PostDetail from "./detail/Detail.vue";
-import axios from "axios";
+import { PropType } from "vue";
+import { IPost } from "../../common/types";
 export default {
   name: "Post",
   components: {
     PostDetail,
   },
-  methods: {
-    fetchData: async function() {
-      try {
-        const response = await axios.get(
-          "https://65dd7c93e7edadead7ee0a54.mockapi.io/user"
-        );
-        this.posts = response.data;
-      } catch (error) {
-        console.error("Error fetching posts:", error);
-      }
+  props:{
+     posts: {
+      type: Array as PropType<IPost[]>,
+      required: true,
     },
-    async handlePostAdded(){
-      await this.fetchData();
-    }
-  },
-  async mounted() {
-    await this.fetchData();
-  },
-  data() {
-    return {
-      posts: [],
-    };
-  },
+  }
 };
 </script>
